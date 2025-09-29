@@ -26,6 +26,9 @@ public static class MovieOptions
         };
         mv.AddRepo(movie);
         Console.WriteLine("Movie added Succesfully!");
+        Console.WriteLine("Press any key to go back to the menu...");
+        Console.ReadKey(true);
+        Console.Clear();
     }
     public static void Update()
     {
@@ -60,6 +63,10 @@ public static class MovieOptions
         };
         mv.UpdateRepo(newmovie);
         Console.WriteLine("Movie updated Succesfully!");
+        Console.WriteLine("Press any key to go back to the menu...");
+        Console.ReadKey(true);
+        Console.Clear();
+    
     }
     public static void Delete()
     {
@@ -71,14 +78,20 @@ public static class MovieOptions
         var movie = mv.GetMovieRepo(id);
         Console.WriteLine($"Deleting Id. {movie.Id} Name: {movie.Movie_Name}.");
         mv.DeleteRepo(id);
+        Console.WriteLine("Press any key to go back to the menu...");
+        Console.ReadKey(true);
+        Console.Clear();
     }
     public static void ListAll()
     {
-        List<Movies> movies = (List<Movies>)mv.ListAllRepo(); 
+        List<Movies> movies = (List<Movies>)mv.ListAllRepo();
         foreach (var movie in movies)
         {
             Console.WriteLine($"ID: {movie.Id} Title: {movie.Movie_Name} Genre: {movie.Movie_Genre} Year: {movie.Movie_Year} Score: {movie.Movie_Score}");
         }
+        Console.WriteLine("Press any key to go back to the menu...");
+        Console.ReadKey(true);
+        Console.Clear();
     }
     public static void GetMovie()
     {
@@ -89,6 +102,8 @@ public static class MovieOptions
         }
         var movie = mv.GetMovieRepo(id);
         Console.WriteLine($"Movie Id. {movie.Id} Title: {movie.Movie_Name} Genre: {movie.Movie_Genre} Year: {movie.Movie_Year} Score: {movie.Movie_Score}.");
-
+        Console.WriteLine("Press any key to go back to the menu...");
+        Console.ReadKey(true);
+        Console.Clear();
     }
 }
