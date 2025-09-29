@@ -56,6 +56,7 @@ public static class MovieOptions
         }
         Movies newmovie = new Movies
         {
+            Id = id,
             Movie_Name = movieName,
             Movie_Genre = mgenre,
             Movie_Year = myear,
