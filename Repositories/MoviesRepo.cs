@@ -7,13 +7,13 @@ public class MoviesRepo
     {
         using var connection = new NpgsqlConnection(ConnectionString);
         connection.Open();
-        var sql = "INSERT INTO movies(movie_name,movie_genre,movie_year,movie_score) VALUES (@Name,@Genre,@Year,@Score)";
+        var sql = "INSERT INTO movies(title,genre,year,score) VALUES (@Title, @Genre, @Year, @Score)";
         connection.Execute(sql, movie);
     }
     public  void UpdateMovie(Movies movie)
     {
         using var connection = new NpgsqlConnection(ConnectionString);
-        var sql = "UPDATE movies SET movie_name = @Name, movie_genre = @Genre, movie_year = @Year, movie_score = @Score WHERE id = @Id";
+        var sql = "UPDATE movies SET title = @Title, genre = @Genre, year = @Year, score = @Score WHERE id = @Id";
         connection.Execute(sql, movie);
     }
     public  void DeleteMovie(int id)

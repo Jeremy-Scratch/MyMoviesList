@@ -15,13 +15,14 @@ public static class MovieOptions
             Console.WriteLine("Invalid input!");
         }
         Console.WriteLine("Enter the movie Score");
-        while (!double.TryParse(Console.ReadLine(), out score) && !(score <= 10 ))
+        while (!double.TryParse(Console.ReadLine(), out score) || (score > 10))
         {
             Console.WriteLine("Invalid input!");
+            if (score >10) { Console.WriteLine("Score can't be greater than 10.0 points"); }
         }
         Movies movie = new Movies
         {
-            Name = name,
+            Title = name,
             Genre = genre,
             Year = year,
             Score = score
@@ -32,32 +33,35 @@ public static class MovieOptions
     public static void Update()
     {
         int id;
+        int year;
+        double score;
         Console.WriteLine("Enter the movie Id to Update...");
         while (!int.TryParse(Console.ReadLine(), out id))
         {
             Console.WriteLine("Invalid ID!");
         }
         var movie = mv.GetMovieById(id);
-        Console.WriteLine($"Updating Id. {movie.Id} Name: {movie.Name}.");
+        Console.WriteLine($"Updating Id. {movie.Id} Name: {movie.Title}.");
 
         Console.WriteLine("Enter the movie Name");
         string name = Console.ReadLine()!;
         Console.WriteLine("Enter the movie Genre");
         string genre = Console.ReadLine()!;
         Console.WriteLine("Enter the movie Year");
-        if (!int.TryParse(Console.ReadLine(), out int year))
+        while (!int.TryParse(Console.ReadLine(), out year))
         {
             Console.WriteLine("Invalid input!");
         }
         Console.WriteLine("Enter the movie Score");
-        if (!double.TryParse(Console.ReadLine(), out double score))
+        while (!double.TryParse(Console.ReadLine(), out score) || (score > 10))
         {
             Console.WriteLine("Invalid input!");
+             if (score >10) { Console.WriteLine("Score can't be greater than 10.0 points"); }
         }
         Movies updatedMovie = new Movies
         {
             Id = id,
-            Name = name,
+            Title = name,
             Genre = genre,
             Year = year,
             Score = score
@@ -73,7 +77,7 @@ public static class MovieOptions
             Console.WriteLine("Invalid ID!");
         }
         var movie = mv.GetMovieById(id);
-        Console.WriteLine($"Deleting Id. {movie.Id} Name: {movie.Name}.");
+        Console.WriteLine($"Deleting Id. {movie.Id} Name: {movie.Title}.");
         mv.DeleteMovie(id);        
     }
     public static void ListAll()
@@ -81,7 +85,7 @@ public static class MovieOptions
         List<Movies> movies = (List<Movies>)mv.ListAllMovies();
         foreach (var movie in movies)
         {
-            Console.WriteLine($"ID: {movie.Id} Title: {movie.Name} Genre: {movie.Genre} Year: {movie.Year} Score: {movie.Score}");
+            Console.WriteLine($"ID: {movie.Id} Title: {movie.Title} Genre: {movie.Genre} Year: {movie.Year} Score: {movie.Score}");
         }
     }
     public static void GetMovie()
@@ -93,6 +97,6 @@ public static class MovieOptions
             Console.WriteLine("Invalid ID!");
         }
         var movie = mv.GetMovieById(id);
-        Console.WriteLine($"Movie Id. {movie.Id} Title: {movie.Name} Genre: {movie.Genre} Year: {movie.Year} Score: {movie.Score}.");
+        Console.WriteLine($"Movie Id. {movie.Id} Title: {movie.Title} Genre: {movie.Genre} Year: {movie.Year} Score: {movie.Score}.");
     }
 }
