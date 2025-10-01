@@ -3,71 +3,67 @@ public static class MovieOptions
     private static MoviesRepo mv = new MoviesRepo();
     public static void Add()
     {
+        int year;
+        double score;
         Console.WriteLine("Enter the movie name");
-        string movieName = Console.ReadLine()!;
+        string name = Console.ReadLine()!;
         Console.WriteLine("Enter the movie genre");
-        string mgenre = Console.ReadLine()!;
+        string genre = Console.ReadLine()!;
         Console.WriteLine("Enter the movie Year");
-        if (!int.TryParse(Console.ReadLine(), out int myear))
+        while (!int.TryParse(Console.ReadLine(), out year))
         {
             Console.WriteLine("Invalid input!");
         }
         Console.WriteLine("Enter the movie Score");
-        if (!double.TryParse(Console.ReadLine(), out double mscore))
+        while (!double.TryParse(Console.ReadLine(), out score) && !(score <= 10 ))
         {
             Console.WriteLine("Invalid input!");
         }
         Movies movie = new Movies
         {
-            Movie_Name = movieName,
-            Movie_Genre = mgenre,
-            Movie_Year = myear,
-            Movie_Score = mscore
+            Name = name,
+            Genre = genre,
+            Year = year,
+            Score = score
         };
-        mv.AddRepo(movie);
-        Console.WriteLine("Movie added Succesfully!");
-        Console.WriteLine("Press any key to go back to the menu...");
-        Console.ReadKey(true);
-        Console.Clear();
+        mv.AddMovie(movie);
+        Console.WriteLine("Movie added Succesfully!\n");
     }
     public static void Update()
     {
+        int id;
         Console.WriteLine("Enter the movie Id to Update...");
-        if (!int.TryParse(Console.ReadLine(), out int id))
+        while (!int.TryParse(Console.ReadLine(), out id))
         {
             Console.WriteLine("Invalid ID!");
         }
-        var movie = mv.GetMovieRepo(id);
-        Console.WriteLine($"Updating Id. {movie.Id} Name: {movie.Movie_Name}.");
+        var movie = mv.GetMovieById(id);
+        Console.WriteLine($"Updating Id. {movie.Id} Name: {movie.Name}.");
 
         Console.WriteLine("Enter the movie Name");
-        string movieName = Console.ReadLine()!;
+        string name = Console.ReadLine()!;
         Console.WriteLine("Enter the movie Genre");
-        string mgenre = Console.ReadLine()!;
+        string genre = Console.ReadLine()!;
         Console.WriteLine("Enter the movie Year");
-        if (!int.TryParse(Console.ReadLine(), out int myear))
+        if (!int.TryParse(Console.ReadLine(), out int year))
         {
             Console.WriteLine("Invalid input!");
         }
         Console.WriteLine("Enter the movie Score");
-        if (!double.TryParse(Console.ReadLine(), out double mscore))
+        if (!double.TryParse(Console.ReadLine(), out double score))
         {
             Console.WriteLine("Invalid input!");
         }
-        Movies newmovie = new Movies
+        Movies updatedMovie = new Movies
         {
             Id = id,
-            Movie_Name = movieName,
-            Movie_Genre = mgenre,
-            Movie_Year = myear,
-            Movie_Score = mscore
+            Name = name,
+            Genre = genre,
+            Year = year,
+            Score = score
         };
-        mv.UpdateRepo(newmovie);
-        Console.WriteLine("Movie updated Succesfully!");
-        Console.WriteLine("Press any key to go back to the menu...");
-        Console.ReadKey(true);
-        Console.Clear();
-    
+        mv.UpdateMovie(updatedMovie);
+        Console.WriteLine("Movie updated Succesfully!\n");    
     }
     public static void Delete()
     {
@@ -76,35 +72,27 @@ public static class MovieOptions
         {
             Console.WriteLine("Invalid ID!");
         }
-        var movie = mv.GetMovieRepo(id);
-        Console.WriteLine($"Deleting Id. {movie.Id} Name: {movie.Movie_Name}.");
-        mv.DeleteRepo(id);
-        Console.WriteLine("Press any key to go back to the menu...");
-        Console.ReadKey(true);
-        Console.Clear();
+        var movie = mv.GetMovieById(id);
+        Console.WriteLine($"Deleting Id. {movie.Id} Name: {movie.Name}.");
+        mv.DeleteMovie(id);        
     }
     public static void ListAll()
     {
-        List<Movies> movies = (List<Movies>)mv.ListAllRepo();
+        List<Movies> movies = (List<Movies>)mv.ListAllMovies();
         foreach (var movie in movies)
         {
-            Console.WriteLine($"ID: {movie.Id} Title: {movie.Movie_Name} Genre: {movie.Movie_Genre} Year: {movie.Movie_Year} Score: {movie.Movie_Score}");
+            Console.WriteLine($"ID: {movie.Id} Title: {movie.Name} Genre: {movie.Genre} Year: {movie.Year} Score: {movie.Score}");
         }
-        Console.WriteLine("Press any key to go back to the menu...");
-        Console.ReadKey(true);
-        Console.Clear();
     }
     public static void GetMovie()
     {
+        int id;
         Console.WriteLine("Enter the movie Id...");
-        if (!int.TryParse(Console.ReadLine(), out int id))
+        while (!int.TryParse(Console.ReadLine(), out id))
         {
             Console.WriteLine("Invalid ID!");
         }
-        var movie = mv.GetMovieRepo(id);
-        Console.WriteLine($"Movie Id. {movie.Id} Title: {movie.Movie_Name} Genre: {movie.Movie_Genre} Year: {movie.Movie_Year} Score: {movie.Movie_Score}.");
-        Console.WriteLine("Press any key to go back to the menu...");
-        Console.ReadKey(true);
-        Console.Clear();
+        var movie = mv.GetMovieById(id);
+        Console.WriteLine($"Movie Id. {movie.Id} Title: {movie.Name} Genre: {movie.Genre} Year: {movie.Year} Score: {movie.Score}.");
     }
 }

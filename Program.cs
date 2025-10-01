@@ -26,6 +26,9 @@
 
                     default: Console.WriteLine("INVALID OPTION!"); break;
                 }
+                Console.WriteLine("Press any key to go back to the menu...");
+                Console.ReadKey(true);
+                Console.Clear();
             }
         }
     }
